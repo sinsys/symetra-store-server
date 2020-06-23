@@ -12,6 +12,7 @@ const config_1 = __importDefault(require("./config"));
 const products_router_1 = __importDefault(require("./products/products-router"));
 const users_router_1 = __importDefault(require("./users/users-router"));
 const purchases_router_1 = __importDefault(require("./purchases/purchases-router"));
+const admin_router_1 = __importDefault(require("./admin/admin-router"));
 const app = express_1.default();
 const morganOpt = (config_1.default.NODE_ENV === 'production')
     ? 'tiny'
@@ -21,6 +22,7 @@ app.use(morgan_1.default(morganOpt), helmet_1.default(), cors_1.default(config_1
 app.use('/api/products', products_router_1.default);
 app.use('/api/users', users_router_1.default);
 app.use('/api/purchases', purchases_router_1.default);
+app.use('/api/admin', admin_router_1.default);
 const errorHandler = (err, req, res, next) => {
     let response;
     if (config_1.default.NODE_ENV === 'production') {
