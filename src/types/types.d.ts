@@ -34,6 +34,11 @@ export type MockData = {
   couponInterval: number;
 }
 
+export type PostResponse = {
+  status: string;
+  value: any;
+}
+
 // declare module 'mock-data' {
 //   class MockData {
 //     constructor(

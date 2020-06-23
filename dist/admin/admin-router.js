@@ -17,7 +17,7 @@ adminRouter
     const { couponCode } = req.body;
     if (!couponCode)
         return res.status(400).json({
-            error: `Missing ${couponCode} from body`
+            error: `Missing couponCode from body`
         });
     admin_service_1.default.updateCouponCode(mock_data_1.default, couponCode)
         .then(response => res.json(response))
@@ -30,7 +30,7 @@ adminRouter
     const { couponInterval } = req.body;
     if (!couponInterval)
         return res.status(400).json({
-            error: `Missing ${couponInterval} from body`
+            error: `Missing couponInterval from body`
         });
     admin_service_1.default.updateCouponCode(mock_data_1.default, couponInterval)
         .then(response => res.json(response))
