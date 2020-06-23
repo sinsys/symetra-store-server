@@ -15,4 +15,13 @@ usersRouter
       .catch(next)
   });
 
+usersRouter
+  // Get a random user
+  .route('/random')
+  .get( (req, res, next) => {
+    UsersService.getRandomUser(mockData)
+      .then(response => res.json(response))
+      .catch(next)
+  });
+
 export default usersRouter;

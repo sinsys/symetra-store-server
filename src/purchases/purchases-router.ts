@@ -18,6 +18,7 @@ purchasesRouter
       .catch(next)
   })
   .post(jsonBodyParser, (req, res, next) => {
+
     const {
       productId,
       userId,
@@ -27,22 +28,28 @@ purchasesRouter
 
     const newPurchase: Purchase = {
       id: uuidv4(),
+      datePurchased: new Date(),
       productId: productId,
       userId: userId,
-      datePurchased: new Date(),
       couponApplied: couponApplied,
-      couponCode: couponCode
+      couponCode: couponApplied
+        ? couponCode
+        : null
     };
-
-    for (const [key, value] of Object.entries(newPurchase))
-    if (value == null)
-      return res.status(400).json({
-        error: `Missing '${key}' in request body`
-      });
 
     PurchasesService.makePurchase(mockData, newPurchase)
       .then(response => res.json(response))
-      .catch(next);
+      .catch(e => console.log(e));
+      // res.json(response))
+      // .catch(next);
   });
 
+purchasesRouter
+  // Get coupon purchases
+  .route('/coupon')
+  .get( (req, res, next) => {
+    PurchasesService.getCouponPurchases(mockData)
+      .then(response => res.json(response))
+      .catch(next);
+  })
 export default purchasesRouter;

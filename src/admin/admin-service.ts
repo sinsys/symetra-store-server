@@ -6,6 +6,16 @@ const AdminService = {
   // The implementation is basic here since we do not need a
   // persistent data layer or any sort of authentication
 
+  // Get Admin details
+
+  getAdminDetails: async (dataSrc: MockData) => {
+    const adminDetails = {
+      couponCode: dataSrc.couponCode,
+      couponInterval: dataSrc.couponInterval
+    };
+    return adminDetails;
+  },
+
   // Update coupon code
   updateCouponCode: async (dataSrc: MockData, couponCode: string) => {
     dataSrc.couponCode = couponCode;
@@ -20,6 +30,7 @@ const AdminService = {
   // Update coupon interval
   updateCouponInterval: async (dataSrc: MockData, couponInterval: number) => {
     dataSrc.couponInterval = couponInterval;
+    console.log("Poop" + dataSrc.couponInterval);
     const response: PostResponse = {
       status: 'Success',
       value: couponInterval

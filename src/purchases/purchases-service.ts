@@ -1,5 +1,6 @@
 // Service - Purchase related
 import { MockData, Purchase, PostResponse } from '../types/types';
+import { SlowBuffer } from 'buffer';
 const PurchasesService = {
 
   // Generally these methods will interact with a DB of some kind.
@@ -11,38 +12,44 @@ const PurchasesService = {
     return dataSrc.purchases as Purchase[];
   },
 
+  // Get purchases made with a coupon
+  getCouponPurchases: async(dataSrc: MockData) => {
+    return dataSrc.purchases.filter(purchase => purchase.couponApplied === true) as Purchase[];
+  },
+
   // Make a purchase
   makePurchase: async(dataSrc: MockData, purchase: Purchase) => {
     // Check if user applied a coupon or not
     let newPurchase = purchase;
+    let user = dataSrc.users.find(user => user.id === purchase.userId);
     if ( newPurchase.couponApplied ) {
       const validCoupon = PurchasesService.validateCoupon(dataSrc, purchase.couponCode)
       if (!validCoupon) {
         newPurchase.couponApplied = false;
         newPurchase.couponCode = null;
       }
+      user.hasCoupon = false;
+      user.couponCode = null;
     }
     // This would be more robust. We're just pushing it to an array for demo purposes
     dataSrc.purchases.push(newPurchase);
 
     // Check if user should be granted a coupon
     const grantCoupon = PurchasesService.checkGrantCoupon(dataSrc);
-    console.log(grantCoupon);
-    if ( grantCoupon ) {
+    if ( grantCoupon === true ) {
       // Apply coupon to user
-      const user = dataSrc.users.find(user => user.id === purchase.userId);
       user.hasCoupon = true;
       user.couponCode = dataSrc.couponCode;
-      console.log(user);
     }
 
     const response: PostResponse = {
       status: 'Success',
-      value: newPurchase
+      value: {
+        purchase: newPurchase,
+        coupon: grantCoupon
+      }
     };
-
     return response;
-
   },
 
   // Check if coupon should be granted

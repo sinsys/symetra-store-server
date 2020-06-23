@@ -16,6 +16,9 @@ const UsersService = {
     // Get all users
     getUsers: (dataSrc) => __awaiter(void 0, void 0, void 0, function* () {
         return dataSrc.users;
+    }),
+    getRandomUser: (dataSrc) => __awaiter(void 0, void 0, void 0, function* () {
+        return dataSrc.users[Math.floor(Math.random() * dataSrc.users.length)];
     })
 };
 exports.default = UsersService;

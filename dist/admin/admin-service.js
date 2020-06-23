@@ -13,6 +13,14 @@ const AdminService = {
     // Generally these methods will interact with a DB of some kind.
     // The implementation is basic here since we do not need a
     // persistent data layer or any sort of authentication
+    // Get Admin details
+    getAdminDetails: (dataSrc) => __awaiter(void 0, void 0, void 0, function* () {
+        const adminDetails = {
+            couponCode: dataSrc.couponCode,
+            couponInterval: dataSrc.couponInterval
+        };
+        return adminDetails;
+    }),
     // Update coupon code
     updateCouponCode: (dataSrc, couponCode) => __awaiter(void 0, void 0, void 0, function* () {
         dataSrc.couponCode = couponCode;
@@ -25,6 +33,7 @@ const AdminService = {
     // Update coupon interval
     updateCouponInterval: (dataSrc, couponInterval) => __awaiter(void 0, void 0, void 0, function* () {
         dataSrc.couponInterval = couponInterval;
+        console.log("Poop" + dataSrc.couponInterval);
         const response = {
             status: 'Success',
             value: couponInterval
