@@ -9,8 +9,13 @@ const UsersService = {
   // Get all users
   getUsers: async (dataSrc: MockData) => {
     return dataSrc.users as User[];
-  }
+  },
 
+  getRandomUser: async(dataSrc: MockData) => {
+    return dataSrc.users[
+      Math.floor(Math.random() * dataSrc.users.length)
+    ];
+  }
 }
 
 export default UsersService;

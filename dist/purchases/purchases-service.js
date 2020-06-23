@@ -25,26 +25,31 @@ const PurchasesService = {
     makePurchase: (dataSrc, purchase) => __awaiter(void 0, void 0, void 0, function* () {
         // Check if user applied a coupon or not
         let newPurchase = purchase;
+        let user = dataSrc.users.find(user => user.id === purchase.userId);
         if (newPurchase.couponApplied) {
             const validCoupon = PurchasesService.validateCoupon(dataSrc, purchase.couponCode);
             if (!validCoupon) {
                 newPurchase.couponApplied = false;
                 newPurchase.couponCode = null;
             }
+            user.hasCoupon = false;
+            user.couponCode = null;
         }
         // This would be more robust. We're just pushing it to an array for demo purposes
         dataSrc.purchases.push(newPurchase);
         // Check if user should be granted a coupon
         const grantCoupon = PurchasesService.checkGrantCoupon(dataSrc);
-        if (grantCoupon) {
+        if (grantCoupon === true) {
             // Apply coupon to user
-            const user = dataSrc.users.find(user => user.id === purchase.userId);
             user.hasCoupon = true;
             user.couponCode = dataSrc.couponCode;
         }
         const response = {
             status: 'Success',
-            value: newPurchase
+            value: {
+                purchase: newPurchase,
+                coupon: grantCoupon
+            }
         };
         return response;
     }),

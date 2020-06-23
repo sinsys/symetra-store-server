@@ -17,5 +17,13 @@ usersRouter
         .then(response => res.json(response))
         .catch(next);
 });
+usersRouter
+    // Get a random user
+    .route('/random')
+    .get((req, res, next) => {
+    users_service_1.default.getRandomUser(mock_data_1.default)
+        .then(response => res.json(response))
+        .catch(next);
+});
 exports.default = usersRouter;
 //# sourceMappingURL=users-router.js.map
