@@ -9,22 +9,18 @@ const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
 const helmet_1 = __importDefault(require("helmet"));
 const config_1 = __importDefault(require("./config"));
-const generate_data_1 = require("./mock-data/generate-data");
+const mock_data_1 = __importDefault(require("./mock-data/mock-data"));
+const products_router_1 = __importDefault(require("./products/products-router"));
 const app = express_1.default();
 const morganOpt = (config_1.default.NODE_ENV === 'production')
     ? 'tiny'
     : 'common';
 const myFunc = (req, res, next) => {
-    res.json(mockData);
-};
-let mockData = {
-    products: generate_data_1.generateProducts(10),
-    users: generate_data_1.generateUsers(5),
-    couponCode: "ABC123",
-    couponInterval: 3
+    res.json(mock_data_1.default);
 };
 app.use(morgan_1.default(morganOpt), helmet_1.default(), cors_1.default(config_1.default.CLIENT_ORIGIN));
 app.get('/', myFunc);
+app.use('/api/products', products_router_1.default);
 const errorHandler = (err, req, res, next) => {
     let response;
     if (config_1.default.NODE_ENV === 'production') {

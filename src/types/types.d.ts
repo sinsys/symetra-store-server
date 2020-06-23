@@ -27,8 +27,32 @@ export type Coupon = {
 }
 
 export type MockData = {
-  products: Product[],
-  users: User[],
-  couponCode: string,
-  couponInterval: number
+  products: Product[];
+  users: User[];
+  purchases: Purchase[];
+  couponCode: string;
+  couponInterval: number;
 }
+
+// declare module 'mock-data' {
+//   class MockData {
+//     constructor(
+//       products: Product[], 
+//       users: User[], 
+//       purchases: Purchase[], 
+//       couponCode: string, 
+//       couponInterval: number
+//     ) {
+//       this.products = products;
+//       this.users = users;
+//       this.purchases = purchases;
+//       this.couponCode = couponCode;
+//       this.couponInterval = couponInterval
+//     }
+//     products: Product[];
+//     users: User[];
+//     purchases: Purchase[];
+//     couponCode: string;
+//     couponInterval: number;
+//   }
+// }
