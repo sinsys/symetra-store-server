@@ -4,9 +4,8 @@ import morgan from 'morgan';
 import cors from 'cors';
 import helmet from 'helmet';
 import config from './config';
-import mockData from './mock-data/mock-data';
 import productsRouter from './products/products-router';
-
+import usersRouter from './users/users-router';
 const app = express();
 
 const morganOpt =
@@ -14,24 +13,17 @@ const morganOpt =
     ? 'tiny'
     : 'common';
 
-const myFunc = (req: Request, res: Response, next: NextFunction) => {
-  res.json(mockData);
-};
-
 app.use(
   morgan(morganOpt),
   helmet(),
   cors(config.CLIENT_ORIGIN)
 );
 
-app.get('/', myFunc);
+// API Endpoint Routers
 app.use('/api/products', productsRouter);
+app.use('/api/users', usersRouter);
 
-interface Error {
-  message: string;
-}
-
-const errorHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
+const errorHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
   let response;
   if (config.NODE_ENV === 'production') {
     response = { 
