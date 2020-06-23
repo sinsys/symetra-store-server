@@ -1,12 +1,11 @@
 require('dotenv').config();
-import express, { Request, Response, NextFunction, ErrorRequestHandler } from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import helmet from 'helmet';
 import config from './config';
-
-import { generateUsers, generateProducts } from './mock-data/generate-data';
-import { Product, User } from './types/types';
+import mockData from './mock-data/mock-data';
+import productsRouter from './products/products-router';
 
 const app = express();
 
@@ -19,13 +18,6 @@ const myFunc = (req: Request, res: Response, next: NextFunction) => {
   res.json(mockData);
 };
 
-let mockData = {
-  products: generateProducts(10) as Product[],
-  users: generateUsers(5) as User[],
-  couponCode: "ABC123",
-  couponInterval: 3
-};
-
 app.use(
   morgan(morganOpt),
   helmet(),
@@ -33,6 +25,7 @@ app.use(
 );
 
 app.get('/', myFunc);
+app.use('/api/products', productsRouter);
 
 interface Error {
   message: string;
