@@ -16,10 +16,10 @@ const morganOpt =
     : 'common';
 
 const myFunc = (req: Request, res: Response, next: NextFunction) => {
-  res.json(data);
+  res.json(mockData);
 };
 
-let data = {
+let mockData = {
   products: generateProducts(10) as Product[],
   users: generateUsers(5) as User[],
   couponCode: "ABC123",
