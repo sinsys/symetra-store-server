@@ -4,8 +4,6 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
-    "test": "mocha --require dist/test/setup.js",
-    "watch": "mocha --require dist/test/setup.js -- --watch",
     "predev": "tsc",
     "dev": "nodemon dist/server.js",
     "build": "tsc",
