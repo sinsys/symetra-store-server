@@ -17,6 +17,10 @@ const PurchasesService = {
     getPurchases: (dataSrc) => __awaiter(void 0, void 0, void 0, function* () {
         return dataSrc.purchases;
     }),
+    // Get purchases made with a coupon
+    getCouponPurchases: (dataSrc) => __awaiter(void 0, void 0, void 0, function* () {
+        return dataSrc.purchases.filter(purchase => purchase.couponApplied === true);
+    }),
     // Make a purchase
     makePurchase: (dataSrc, purchase) => __awaiter(void 0, void 0, void 0, function* () {
         // Check if user applied a coupon or not
@@ -32,13 +36,11 @@ const PurchasesService = {
         dataSrc.purchases.push(newPurchase);
         // Check if user should be granted a coupon
         const grantCoupon = PurchasesService.checkGrantCoupon(dataSrc);
-        console.log(grantCoupon);
         if (grantCoupon) {
             // Apply coupon to user
             const user = dataSrc.users.find(user => user.id === purchase.userId);
             user.hasCoupon = true;
             user.couponCode = dataSrc.couponCode;
-            console.log(user);
         }
         const response = {
             status: 'Success',

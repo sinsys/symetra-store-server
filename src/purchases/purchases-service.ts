@@ -11,6 +11,11 @@ const PurchasesService = {
     return dataSrc.purchases as Purchase[];
   },
 
+  // Get purchases made with a coupon
+  getCouponPurchases: async(dataSrc: MockData) => {
+    return dataSrc.purchases.filter(purchase => purchase.couponApplied === true) as Purchase[];
+  },
+
   // Make a purchase
   makePurchase: async(dataSrc: MockData, purchase: Purchase) => {
     // Check if user applied a coupon or not
@@ -27,13 +32,11 @@ const PurchasesService = {
 
     // Check if user should be granted a coupon
     const grantCoupon = PurchasesService.checkGrantCoupon(dataSrc);
-    console.log(grantCoupon);
     if ( grantCoupon ) {
       // Apply coupon to user
       const user = dataSrc.users.find(user => user.id === purchase.userId);
       user.hasCoupon = true;
       user.couponCode = dataSrc.couponCode;
-      console.log(user);
     }
 
     const response: PostResponse = {
@@ -42,7 +45,6 @@ const PurchasesService = {
     };
 
     return response;
-
   },
 
   // Check if coupon should be granted
