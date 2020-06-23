@@ -1,8 +1,10 @@
-# Symetra Store  
+# Symetra Store Client
 
 ## Table of Contents
 - [Description](#description)
 - [Live Link](#live-link)
+- [Client Code](#client-code)
+- [Instructions](#instructions)
 - [Goals](#goals)
   - [Develop API resources](#develop-api-resources-to-enable)
   - [Stretch Goal](#stretch-goal)
@@ -14,8 +16,23 @@
 ## Description:
 Imagine an ecommerce store where the store owner gives out discounts to every nth transaction. Customers, as they login, get to see if they have discount and the appropriate discount code. Customers can then purchase items using the discount code if available. The store owner reviews at various times what the count of purchases that were made in the store as well as the total count of discounts that were given out.
 
-## Live Link:
-https://symetra-store.vercel.app  
+## Live Server Host:
+https://ancient-reef-64647.herokuapp.com/  
+
+## Client Code
+https://github.com/sinsys/symetra-store  
+
+## Instructions
+- The app can be used online as both of the client and the server code are deployed. You can visit the live site here:
+  - https://symetra-store.vercel.app
+- To run the app locally:
+  - Clone both of the server and client repositories to a directory on your machine
+  - Run `npm i` within both project directories to install dependencies
+  - Run `npm start` on the server code repository
+  - Run `npm start` on the client code repository
+  - The app will be running on `http://localhost:3000`
+  - Tests are not available for the server code at this time due to time constraints. They will be added shortly
+  - The client code can be tested by running `npm i`
 
 ## Goals: 
 ### Develop API resources:
@@ -38,19 +55,20 @@ https://symetra-store.vercel.app
 
 ## Scripts:  
 - `npm i` - Installs the necessary dependencies
-- `npm start` - Starts the server locally
-- `npm t` - Runs route tests
+- `npm start` - Starts the server locally  
+
+## Endpoints:
+- `GET /api/products` - Returns an array of all products
+- `GET /api/users` - Returns an array of all users
+- `GET /api/users/random` - Returns a single, randomly selected user
+- `GET /api/purchases` - Returns an array of all purchases
+- `GET /api/purchases/coupon` - Returns all purchases that used a coupon
+- `GET /api/admin` - Returns the active coupon interval and code
+- `POST /api/purchases` - Adds a new purchase
+- `POST /api/admin/coupon` - Changes the coupon code
+- `POST /api/admin/interval` - Changes the coupon interval  
 
 ## Notable Points:
-<!-- - Data is generated randomly to demonstrate scale and resilience
-  - You can set different amounts of products and users when they are initialized in `./src/App.tsx`. The default was set to 10.
-- Because we need no persistent data layer, data is stored in React Context
-  - `localStorage` or `sessionStorage` were considered, but Context made sense for demo purposes
-- You can toggle between the active user with the button in the top right. It is purely a random selection from all users to demonstrate that the coupon is only valid for the user that purchased the `nth` item
-- API Routes were written pretty open ended. Stubs were put in place for interacting with a real API and the functions were used, but for the purposes of a demo I kept it all self-contained in Context and spoofed expected responses. Comments are available on the `./src/services/ApiService.tsx` file.
-  - For the purposes of demoing what the `POST` or `PATCH` body properties look like, I have `console.log(foo)` an example endpoint and the expected response.
-- Reports are downloaded via the buttons on the Admin page. A `json` file will be downloaded to your device for the selection you chose. All purchases are displayed in a table for demo purposes.
-- The data has no persistence. A manual page refresh or closing your window will remove any purchases/settings you've changed. All data will persist while the app is open.
-- Once a coupon is valid on a user, the user will get a "Use Coupon `couponCode`" button by the buy button. You can toggle this to either apply or remove the coupon for the purchase.
-- It was unclear how the coupon interval should be handled when an Admin modifies the interval. Without additional context, I left the calculation compared to all available orders instead of resetting it to 0 on a change.   -->
+- Due to the time restriction, I was not able to write tests for the API paths. I intend to write tests, but they will take another 2-3 hours to create all of the fixtures required.
+- We are just using a global module for data called `mockData`. The data will be persistent until the server sleeps (30 mins of inactivity).
 
