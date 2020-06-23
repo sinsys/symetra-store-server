@@ -7,6 +7,7 @@ import config from './config';
 import productsRouter from './products/products-router';
 import usersRouter from './users/users-router';
 import purchasesRouter from './purchases/purchases-router';
+import adminRouter from './admin/admin-router';
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(
 app.use('/api/products', productsRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/purchases', purchasesRouter);
+app.use('/api/admin', adminRouter);
 
 const errorHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
   let response;
