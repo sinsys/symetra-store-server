@@ -1,0 +1,1 @@
+{"version":3,"file":"purchases-service.js","sourceRoot":"","sources":["../../src/purchases/purchases-service.ts"],"names":[],"mappings":";;;;;;;;;;;AAEA,MAAM,gBAAgB,GAAG;IAEvB,gEAAgE;IAChE,0DAA0D;IAC1D,sDAAsD;IAEtD,mBAAmB;IACnB,YAAY,EAAE,CAAO,OAAiB,EAAE,EAAE;QACxC,OAAO,OAAO,CAAC,SAAuB,CAAC;IACzC,CAAC,CAAA;CAEF,CAAA;AAED,kBAAe,gBAAgB,CAAC"}

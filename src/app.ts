@@ -6,6 +6,8 @@ import helmet from 'helmet';
 import config from './config';
 import productsRouter from './products/products-router';
 import usersRouter from './users/users-router';
+import purchasesRouter from './purchases/purchases-router';
+
 const app = express();
 
 const morganOpt =
@@ -22,6 +24,7 @@ app.use(
 // API Endpoint Routers
 app.use('/api/products', productsRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/purchases', purchasesRouter);
 
 const errorHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
   let response;
