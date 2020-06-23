@@ -1,5 +1,5 @@
-
-import { MockData, Product } from '../types/types';
+// Service - Admin related
+import { MockData, PostResponse } from '../types/types';
 const AdminService = {
 
   // Generally these methods will interact with a DB of some kind.
@@ -9,19 +9,23 @@ const AdminService = {
   // Update coupon code
   updateCouponCode: async (dataSrc: MockData, couponCode: string) => {
     dataSrc.couponCode = couponCode;
-    return {
+    const response: PostResponse = {
       status: 'Success',
       value: couponCode
-    }
+    };
+
+    return response;
   },
 
   // Update coupon interval
   updateCouponInterval: async (dataSrc: MockData, couponInterval: number) => {
     dataSrc.couponInterval = couponInterval;
-    return {
+    const response: PostResponse = {
       status: 'Success',
       value: couponInterval
-    }
+    };
+
+    return response;
   }
 
 }

@@ -1,4 +1,4 @@
-
+// Service - User related
 import { MockData, User } from '../types/types';
 const UsersService = {
 

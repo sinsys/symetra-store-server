@@ -16,18 +16,20 @@ const AdminService = {
     // Update coupon code
     updateCouponCode: (dataSrc, couponCode) => __awaiter(void 0, void 0, void 0, function* () {
         dataSrc.couponCode = couponCode;
-        return {
+        const response = {
             status: 'Success',
             value: couponCode
         };
+        return response;
     }),
     // Update coupon interval
     updateCouponInterval: (dataSrc, couponInterval) => __awaiter(void 0, void 0, void 0, function* () {
         dataSrc.couponInterval = couponInterval;
-        return {
+        const response = {
             status: 'Success',
             value: couponInterval
         };
+        return response;
     })
 };
 exports.default = AdminService;

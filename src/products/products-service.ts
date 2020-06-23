@@ -1,4 +1,4 @@
-
+// Service - Product related
 import { MockData, Product } from '../types/types';
 const ProductsService = {
 
