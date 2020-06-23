@@ -15,9 +15,9 @@ const morganOpt = (config_1.default.NODE_ENV === 'production')
     ? 'tiny'
     : 'common';
 const myFunc = (req, res, next) => {
-    res.json(data);
+    res.json(mockData);
 };
-let data = {
+let mockData = {
     products: generate_data_1.generateProducts(10),
     users: generate_data_1.generateUsers(5),
     couponCode: "ABC123",
